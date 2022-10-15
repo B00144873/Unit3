@@ -6,7 +6,7 @@ public class PlayerControllerX : MonoBehaviour
 {
     public bool gameOver;
 
-    public float floatForce = 7.5f; // Hardcode floatForce to 7.5
+    private float floatForce = 50.0f; // Hardcode floatForce to 50
     private float gravityModifier = 1.5f;
     private Rigidbody playerRb;
 
@@ -18,6 +18,7 @@ public class PlayerControllerX : MonoBehaviour
     public AudioClip explodeSound;
     public AudioClip bounceSound;
 
+    private float topBound;
     public bool isLowEnough = true;
 
     // Start is called before the first frame update
@@ -31,6 +32,7 @@ public class PlayerControllerX : MonoBehaviour
         // Apply a small upward force at the start of the game
         playerRb.AddForce(Vector3.up * 5, ForceMode.Impulse);
 
+        topBound = GameObject.Find("Background").GetComponent<BoxCollider>().size.y; // topBound is equal to the height of the background
     }
 
     // Update is called once per frame
@@ -42,12 +44,12 @@ public class PlayerControllerX : MonoBehaviour
             playerRb.AddForce(Vector3.up * floatForce);
         }
 
-        // If player's y position is too high, isLowEnough is set to false
-        if (transform.position.y < 15)
+        // If player y position exceeds topBound, isLowEnough is set to false
+        if (transform.position.y < topBound)
         {
             isLowEnough = true;
         }
-        else if (transform.position.y > 15)
+        else if (transform.position.y > topBound)
         {
             isLowEnough = false;
         }

@@ -6,7 +6,7 @@ public class PlayerControllerX : MonoBehaviour
 {
     public bool gameOver;
 
-    public float floatForce; // Set floatForce to 5 from 50 in Unity Editor
+    public float floatForce = 7.5f; // Hardcode floatForce to 7.5
     private float gravityModifier = 1.5f;
     private Rigidbody playerRb;
 
